@@ -1,0 +1,11 @@
+D:\SE Projects\Voice_Assistant\bin\Debug\Voice_Assistant.exe.config
+D:\SE Projects\Voice_Assistant\bin\Debug\Voice_Assistant.exe
+D:\SE Projects\Voice_Assistant\bin\Debug\Voice_Assistant.pdb
+D:\SE Projects\Voice_Assistant\obj\Debug\Voice_Assistant.csproj.AssemblyReference.cache
+D:\SE Projects\Voice_Assistant\obj\Debug\Voice_Assistant.csproj.SuggestedBindingRedirects.cache
+D:\SE Projects\Voice_Assistant\obj\Debug\Voice_Assistant.Voice_Assistant.resources
+D:\SE Projects\Voice_Assistant\obj\Debug\Voice_Assistant.Properties.Resources.resources
+D:\SE Projects\Voice_Assistant\obj\Debug\Voice_Assistant.csproj.GenerateResource.cache
+D:\SE Projects\Voice_Assistant\obj\Debug\Voice_Assistant.csproj.CoreCompileInputs.cache
+D:\SE Projects\Voice_Assistant\obj\Debug\Voice_Assistant.exe
+D:\SE Projects\Voice_Assistant\obj\Debug\Voice_Assistant.pdb

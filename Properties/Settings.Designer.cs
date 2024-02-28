@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SENIGMA.Properties
+namespace Voice_Assistant.Properties
 {
 
 

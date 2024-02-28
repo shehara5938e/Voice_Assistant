@@ -1,13 +1,20 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Speech.Recognition;
 using System.Speech.Synthesis;
-using System.Windows.Forms;
+using System.Diagnostics;
 using System.Xml;
 
-namespace SENIGMA
+namespace Voice_Assistant
 {
-    public partial class Form1 : Form
+    public partial class Voice_Assistant : Form
     {
         //AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes
         //AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes
@@ -23,24 +30,29 @@ namespace SENIGMA
         string high;
         string low;
 
-        public Form1()
+        public Voice_Assistant()
         {
             InitializeComponent();
 
             //Speech Synthesis + Basic Codes//Speech Synthesis + Basic Codes
 
-
             ai.SelectVoiceByHints(VoiceGender.Female);
             //wake = false;
             ai.Rate = 1;
 
-            if (wake = true)
+            if (wake == true)
             {
-                label5.Text = "Awake";
+                pictureBox2.Visible = false;
+                pictureBox3.Visible = true;
+                label5.Text = "Active";
+                panel2.BackColor = Color.SpringGreen;
             }
             else
             {
-                label5.Text = "Sleep";
+                pictureBox3.Visible = false;
+                pictureBox2.Visible = true;
+                label5.Text = "Passive";
+                panel2.BackColor = Color.LightPink;
             }
 
             DateTime currentTime = DateTime.Now;
@@ -63,14 +75,13 @@ namespace SENIGMA
 
             //Speech Synthesis + Basic Codes//Speech Synthesis + Basic Codes
 
-
             //Speech Recognition//Speech Recognition//Speech Recognition
 
             list.Add(new string[]
-            {"wakeup", "sleep", "restart", "hi alexa", "terminate program",
-             "what time is it", "whats the todays date", "whats the weather like", "whats the temperature now", "hey alexa", 
-             "play music", "stop music", "close music", "open edge", "close edge", 
-             "open search", "close search", "open whatsapp", "close whatsapp", "open linkedin", "close linkedin"});
+            {"active listening on", "active listening off", "restart", "hi seni", "terminate program",
+             "what time is it", "whats the todays date", "whats the weather like", "whats the temperature now", "hey seni",
+             "play music", "stop music", "close music", "open edge", "close edge", "open web search", "close web search",
+                "open whatsapp", "close whatsapp", "open linkedin", "close linkedin", "open explorer", "close explorer"});
 
             Grammar gr = new Grammar(new GrammarBuilder(list));
 
@@ -84,7 +95,7 @@ namespace SENIGMA
             }
             catch { return; }
 
-            //Speech Recognition//Speech Recognition//Speech Recognition           
+            //Speech Recognition//Speech Recognition//Speech Recognition
         }
 
         public void say(string h)
@@ -95,11 +106,18 @@ namespace SENIGMA
         }
 
         //randome response
-        string[] greetings = new string[3] {"Hi there", "Hello", "Hi"};
+        string[] greetings = new string[3] { "Hi there", "Hello", "Hi whatz up" };
         public string greetings_action()
         {
             Random r = new Random();
             return greetings[r.Next(3)];
+        }
+
+        string[] accept = new string[4] { "Ok. Now,", "Ok sir. Now,", "Copy That. Now,", "Got it. Now," };
+        public string accept_action()
+        {
+            Random a = new Random();
+            return accept[a.Next(3)];
         }
 
         private void rec_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -110,22 +128,28 @@ namespace SENIGMA
             //Conversational Codes//Conversational Codes//Conversational Codes//Conversational Codes//Conversational Codes//Conversational Codes
 
             //precise listening
-            //if (r == "hey alexa")
+            //if (r == "hey seni")
             //{
             //    wake = true;
             //}
 
             //wake sleep
-            if (r == "wakeup")
+            if (r == "active listening on")
             {
-                say("System Is Now Online");
-                label5.Text = "Awake";
+                pictureBox2.Visible = false;
+                pictureBox3.Visible = true;
+                label5.Text = "Active";
+                panel2.BackColor = Color.SpringGreen;
+                say("Active Listening On");
                 wake = true;
             }
-            else if (r == "sleep")
+            else if (r == "active listening off")
             {
-                say("System Is Now Offline");
-                label5.Text = "Sleep";
+                pictureBox3.Visible = false;
+                pictureBox2.Visible = true;
+                label5.Text = "Passive";
+                panel2.BackColor = Color.LightPink;
+                say("Active Listening Off");
                 wake = false;
             }
             //wake sleep
@@ -148,10 +172,10 @@ namespace SENIGMA
                 //essential commands
 
                 //information commands
-                //if (r == "hi alexa")
-                //{
-                //    say(greetings_action());
-                //}
+                if (r == "hi seni")
+                {
+                    say(greetings_action());
+                }
 
                 if (r == "what time is it")
                 {
@@ -177,24 +201,26 @@ namespace SENIGMA
                 //specified apps launching & closing commands
                 if (r == "play music")
                 {
-                    say("Playing your favourite songs list on youtube.");
+                    say(accept_action() + " playing your favourite songs list on youtube.");
                     Process.Start("https://www.youtube.com/watch?v=FM7MFYoylVs&list=RDFM7MFYoylVs");
                 }
 
-                if (r == "stop music")
+                if (r == "stop music" || r == "close music")
                 {
-                    say("Programs closing sequence is under development, sorry for the inconvenience.");
+                    say(accept_action() + " Stoping Music");
+                    killprog("msedge.exe");
                 }
 
-                if (r == "open search")
+                if (r == "open web search")
                 {
-                    say("Opening Google Search");
+                    say(accept_action() + " Opening Google Search");
                     Process.Start("https://www.google.com/");
                 }
 
-                if (r == "close search")
+                if (r == "close web search")
                 {
-                    say("Programs closing sequence is under development, sorry for the inconvenience.");
+                    say(accept_action() + " Closing Web Search");
+                    killprog("msedge.exe");
                 }
 
                 if (r == "open whatsapp")
@@ -205,7 +231,8 @@ namespace SENIGMA
 
                 if (r == "close whatsapp")
                 {
-                    say("Programs closing sequence is under development, sorry for the inconvenience.");
+                    say("Closing WhatsApp");
+                    killprog("msedge.exe");
                 }
 
                 if (r == "open linkedin")
@@ -216,7 +243,8 @@ namespace SENIGMA
 
                 if (r == "close linkedin")
                 {
-                    say("Programs closing sequence is under development, sorry for the inconvenience.");
+                    say("Closing Linkedin");
+                    killprog("msedge.exe");
                 }
 
                 if (r == "open edge")
@@ -227,8 +255,8 @@ namespace SENIGMA
 
                 if (r == "close edge")
                 {
-                    say("Programs closing sequence is under development, sorry for the inconvenience.");
-                    //killprog("msedge.exe");
+                    say("Closing Edge");
+                    killprog("msedge.exe");
                 }
                 //specified apps launching & closing commands
             }
@@ -239,50 +267,47 @@ namespace SENIGMA
             //Conversational Codes//Conversational Codes//Conversational Codes//Conversational Codes//Conversational Codes//Conversational Codes
         }
 
-        //restart method//restart method//restart method
+        //Active Listening On//Active Listening On
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            pictureBox2.Visible = false;
+            pictureBox3.Visible = true;
+            label5.Text = "Active";
+            panel2.BackColor = Color.SpringGreen;
+            say("Active Listening On");
+            wake = true;
+        }
+
+        //Active Listening Off//Active Listening Off
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            pictureBox3.Visible = false;
+            pictureBox2.Visible = true;
+            label5.Text = "Passive";
+            panel2.BackColor = Color.LightPink;
+            say("Active Listening Off");
+            wake = false;
+        }
+
         //restart method//restart method//restart method
         public void restart()
         {
-            Process.Start(@"D:\SE Projects\SENIGMA\bin\Debug\SENIGMA.exe");
+            Process.Start(@"\bin\Debug\Voice_Assistant.exe");
             Application.Exit();
         }
         //restart method//restart method//restart method
-        //restart method//restart method//restart method
 
-        //kill app//kill app//kill app
         //kill app//kill app//kill app
         public void killprog(string s)
         {
-            try
+            foreach (var process in Process.GetProcessesByName(s))
             {
-                Process[] procs = Process.GetProcessesByName(s);
-
-                if (procs != null)
-                {
-                    foreach (Process proc in procs)
-                    {
-                        if (!proc.HasExited)
-                        {
-                            proc.Kill();
-                        }
-                        proc.Dispose();
-                    }
-                }
-                else
-                {
-                    return;
-                }
-            }
-            catch
-            {
-                return;
+                process.Kill();
             }
         }
         //kill app//kill app//kill app
-        //kill app//kill app//kill app
 
-        //weather method//weather method//weather method
-        //weather method//weather method//weather method
+        //weather method//weather method
         public String GetWeather(String input)
         {
             String query = String.Format("https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='Colombo, Sri Lanka')&format=xml&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys");
@@ -323,15 +348,26 @@ namespace SENIGMA
             }
             return "error";
         }
-        //weather method//weather method//weather method
-        //weather method//weather method//weather method
+        //weather method//weather method
 
         //AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes
         //AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes
         //AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes//AI Codes
-        private void Form1_Load(object sender, EventArgs e)
+
+        private void Voice_Assistant_Load(object sender, EventArgs e)
         {
             timer1.Start();
+        }
+
+        public void Update_Time()
+        {
+            label6.Text = DateTime.Now.ToString("d");
+            label7.Text = DateTime.Now.ToString("hh:mm:ss:tt");
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Update_Time();
         }
     }
 }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SENIGMA")]
+[assembly: AssemblyTitle("Voice_Assistant")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SENIGMA")]
+[assembly: AssemblyProduct("Voice_Assistant")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("81fef7e5-ec62-49e5-b622-0af569512021")]
+[assembly: Guid("9a1ea35b-c3e0-4f5a-b074-4843c7a7dab5")]
 
 // Version information for an assembly consists of the following four values:
 //

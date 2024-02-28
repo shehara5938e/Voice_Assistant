@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{81FEF7E5-EC62-49E5-B622-0AF569512021}</ProjectGuid>
+    <ProjectGuid>{9A1EA35B-C3E0-4F5A-B074-4843C7A7DAB5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SENIGMA</RootNamespace>
-    <AssemblyName>SENIGMA</AssemblyName>
+    <RootNamespace>Voice_Assistant</RootNamespace>
+    <AssemblyName>Voice_Assistant</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -47,16 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Voice_Assistant.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Voice_Assistant.Designer.cs">
+      <DependentUpon>Voice_Assistant.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Voice_Assistant.resx">
+      <DependentUpon>Voice_Assistant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
